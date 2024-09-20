@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  minecraft:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-25565}:25565"
+    environment:
+      - DIR=${DIR:-server}
+      - SERVER=${SERVER:-paper-1.19.3-latest}
+      - MEMORY=${MEMORY:-4}
+      - BACKUP=${BACKUP:-false}
+      - RESTART=${RESTART:-true}
+      - PLAYERS=${PLAYERS:-100}
+      - PLUGINS=${PLUGINS:-plugins}
+      - WORLDS=${WORLDS:-worlds}
+      - PORT=${PORT:--1}
+      - DEBUG_PORT=${DEBUG_PORT:--1}
+    volumes:
+      - ./server:/app/server
+      - ./plugins:/app/plugins
+      - ./worlds:/app/worlds
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+
+volumes:
+  server:
+  plugins:
+  worlds:

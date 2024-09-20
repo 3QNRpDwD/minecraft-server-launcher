@@ -4,3 +4,8 @@
 
 # Servers
 **/server/
+
+
+# Added by cargo
+
+/target
